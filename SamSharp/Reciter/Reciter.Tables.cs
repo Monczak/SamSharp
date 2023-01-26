@@ -230,6 +230,7 @@ namespace SamSharp.Reciter
 
             " (IN)=IHN|"+
             " (I) =AY4|"+
+            " (I)'M =AY4|"+     // Custom rule (I'm), the JS version doesn't need this for some reason
             "(I) =AY|"+
             "(IN)D=AY5N|"+
             "INS(I)DE=AH4IY|" + // Custom rule (inside)
