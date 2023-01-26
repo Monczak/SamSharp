@@ -121,6 +121,7 @@ namespace SamSharp.Reciter
             " (BUS)#=BIH4Z|"+
             "(BREAK)=BREY5K|"+
             "(BUIL)=BIH4L|"+
+            "(BYE)=BAH4IY|"+
             "(B)=B|"+
 
             " (C) =SIY4|"+
@@ -194,6 +195,7 @@ namespace SamSharp.Reciter
             "(EY)=IY|"+
             "(EU)=YUW5|"+
             "(EQUAL)=IY4KWUL|"+
+            "(E)VIL=IY5|"+  // Custom rule (evil)
             "(E)=EH|"+
 
             " (F) =EH4F|"+
@@ -222,6 +224,7 @@ namespace SamSharp.Reciter
             " (HERE)=/HIYR|"+
             " (HOUR)=AW5ER|"+
             "(HOW)=/HAW|"+
+            "H(EA)RT+=AH4|"+   // Custom rule (heart)
             "(H)#=/H|"+
             "(H)=|"+
 
@@ -229,6 +232,7 @@ namespace SamSharp.Reciter
             " (I) =AY4|"+
             "(I) =AY|"+
             "(IN)D=AY5N|"+
+            "INS(I)DE=AH4IY|" + // Custom rule (inside)
             "SEM(I)=IY|"+
             " ANT(I)=AY|"+
             "(IER)=IYER|"+
@@ -456,6 +460,7 @@ namespace SamSharp.Reciter
 
             " (V) =VIY4|"+
             "(VIEW)=VYUW5|"+
+            "(VA)L=VAE|"+   // Custom rule (valley)
             "(V)=V|"+
 
             " (W) =DAH4BULYUW|"+

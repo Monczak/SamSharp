@@ -54,8 +54,10 @@ namespace SamSharp.Reciter
         /// <param name="pos">The char's index.</param>
         /// <param name="flags">The flags to match against.</param>
         /// <returns>Whether the char at pos matches against the flags.</returns>
-        private bool FlagsAt(string text, int pos, CharFlags flags) => MatchesFlags(pos >= text.Length ? (char?)null : text[pos], flags); // JS is stupid (text[pos] will return undefined if pos is out of range)
+        private bool FlagsAt(string text, int pos, CharFlags flags) => MatchesFlags(CharAt(text, pos), flags); // JS is stupid (text[pos] will return undefined if pos is out of range)
 
+        private char? CharAt(string text, int pos) => pos >= text.Length ? (char?)null : text[pos];
+        
         private bool IsOneOf<T>(T text, params T[] arr) => arr.Contains(text);
 
         /// <summary>
@@ -109,7 +111,7 @@ namespace SamSharp.Reciter
                                     if (FlagsAt(text, --pos, CharFlags.Voiced))
                                         return true;
 
-                                    var inputChar = text[pos];
+                                    var inputChar = CharAt(text, pos);
                                     // 'H'
                                     if (inputChar != 'H')
                                         return false;
@@ -179,7 +181,7 @@ namespace SamSharp.Reciter
                                     if (FlagsAt(text, ++pos, CharFlags.Voiced))
                                         return true;
 
-                                    var inputChar = text[pos];
+                                    var inputChar = CharAt(text, pos);
                                     // 'H'
                                     if (inputChar != 'H')
                                         return false;
@@ -194,7 +196,7 @@ namespace SamSharp.Reciter
                                 // '^' - Next char must be a consonant
                                 '^' => () => FlagsAt(text, ++pos, CharFlags.Consonant),
                                 // '+' - Next char must be either 'E', 'I' or 'Y'
-                                '+' => () => IsOneOf(text[++pos], 'E', 'I', 'Y'),
+                                '+' => () => IsOneOf(CharAt(text, ++pos), 'E', 'I', 'Y'),
                                 // ':' - Walk right in input until we hit a non-consonant
                                 ':' => () =>
                                 {
@@ -235,10 +237,10 @@ namespace SamSharp.Reciter
 
                                     // Not "ER", "ES" or "ED"
                                     // FIXME: Could break sometimes due to JS being stupid? Needs more testing
-                                    if (!IsOneOf(text[pos + 2], 'R', 'S', 'D'))
+                                    if (!IsOneOf(CharAt(text, pos + 2), 'R', 'S', 'D'))
                                     {
                                         // Not "EL"
-                                        if (text[pos + 2] != 'L')
+                                        if (CharAt(text, pos + 2) != 'L')
                                         {
                                             // "EFUL"
                                             if (text.Substring(pos + 2, 3) == "FUL")
@@ -251,7 +253,7 @@ namespace SamSharp.Reciter
                                         }
 
                                         // Not "ELY"
-                                        if (text[pos + 3] != 'Y')
+                                        if (CharAt(text, pos + 3) != 'Y')
                                             return false;
                                         pos += 3;
                                         return true;
@@ -267,7 +269,7 @@ namespace SamSharp.Reciter
                         }
                     }
                     // Rule char does not match
-                    else if (text[++pos] != ruleByte)
+                    else if (CharAt(text, ++pos) != ruleByte)
                         return false;
                 }
                 return true;
@@ -290,7 +292,7 @@ namespace SamSharp.Reciter
                 return true;
             }
 
-            RuleMatcher result = (text, inputPos, callback) =>
+            bool Result(string text, int inputPos, SuccessCallback callback)
             {
                 if (Matches(text, inputPos))
                 {
@@ -298,10 +300,12 @@ namespace SamSharp.Reciter
                     callback(target, match.Length);
                     return true;
                 }
+
                 // !! - Not in original JS code
                 return false;
-            };
-            return (result, match[0]);
+            }
+
+            return (Result, match[0]);
         }
 
         public string TextToPhonemes(string input)
