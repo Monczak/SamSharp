@@ -308,6 +308,11 @@ namespace SamSharp.Reciter
             return (Result, match[0]);
         }
 
+        /// <summary>
+        /// Converts a string in plain English to a string of SAM phonemes.
+        /// </summary>
+        /// <param name="input">The English text.</param>
+        /// <returns>A string of SAM phonemes.</returns>
         public string TextToPhonemes(string input)
         {
             string text = " " + input.ToUpperInvariant();

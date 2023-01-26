@@ -517,7 +517,7 @@ namespace SamSharp.Reciter
             "($)= DAA4LER|"+
             "(%)= PERSEH4NT|"+
             "(&)= AEND|"+
-            "(\")=|"+
+            "(\')=|"+
             "(*)= AE4STERIHSK|"+
             "(+)= PLAH4S|"+
             "(,)=,|"+
