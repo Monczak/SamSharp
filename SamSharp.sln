@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharp", "SamSharp\SamSharp.csproj", "{26A545A7-D52C-4EA4-A754-1494035CB760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharpTest", "SamSharpTest\SamSharpTest.csproj", "{47982F03-B33A-4492-B607-1E3C199C9AA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26A545A7-D52C-4EA4-A754-1494035CB760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A545A7-D52C-4EA4-A754-1494035CB760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A545A7-D52C-4EA4-A754-1494035CB760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26A545A7-D52C-4EA4-A754-1494035CB760}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
