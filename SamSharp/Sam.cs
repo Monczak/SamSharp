@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SamSharp
 {
@@ -6,7 +7,9 @@ namespace SamSharp
     {
         public void Test()
         {
-            
+            Reciter.Reciter reciter = new Reciter.Reciter();
+            string result = reciter.TextToPhonemes("computer");
+            Debug.WriteLine(result);
         }
     }
 }
