@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 
@@ -10,6 +11,7 @@ namespace SamSharp.Reciter
         /// <summary>
         /// Contains matchers for rules.
         /// </summary>
+        // private Dictionary<char, List<RuleMatcher>> rules;
         private Dictionary<char, List<RuleMatcher>> rules;
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace SamSharp.Reciter
         /// <param name="c">The char to test.</param>
         /// <param name="flags">The flags to test against.</param>
         /// <returns>Whether the char matches against the flags.</returns>
-        private bool MatchesFlags(char c, CharFlags flags) => (charFlags[c] & (int)flags) != 0;
+        private bool MatchesFlags(char? c, CharFlags flags) => (c is null ? 0 : charFlags[c.Value] & (int)flags) != 0;
         
         /// <summary>
         /// Matches a string's char against the specified flags.
@@ -52,7 +54,7 @@ namespace SamSharp.Reciter
         /// <param name="pos">The char's index.</param>
         /// <param name="flags">The flags to match against.</param>
         /// <returns>Whether the char at pos matches against the flags.</returns>
-        private bool FlagsAt(string text, int pos, CharFlags flags) => MatchesFlags(text[pos], flags);
+        private bool FlagsAt(string text, int pos, CharFlags flags) => MatchesFlags(pos >= text.Length ? (char?)null : text[pos], flags); // JS is stupid (text[pos] will return undefined if pos is out of range)
 
         private bool IsOneOf<T>(T text, params T[] arr) => arr.Contains(text);
 
@@ -144,7 +146,7 @@ namespace SamSharp.Reciter
 
                     // Rule char does not match
                     // TODO: IndexOutOfRangeException thrown here
-                    if (text[--pos] != ruleByte)
+                    else if (text[--pos] != ruleByte)
                         return false;
                 }
 
@@ -210,10 +212,12 @@ namespace SamSharp.Reciter
                                 '%' => () =>
                                 {
                                     // If not "E", check if "ING"
-                                    if (text[pos + 1] != 'E')
+                                    if (pos + 1 >= text.Length || text[pos + 1] != 'E') // JS is stupid (text[pos + 1] will return undefined if pos + 1 is out of range, so the condition evaluates to true)
                                     {
                                         // Are next chars "ING"?
-                                        if (text.Substring(pos + 1, 3) == "ING")
+                                        // JS is stupid (text.substr(pos + 1, length) will return "" if pos + 1 is out of range, so the condition evaluates to false)
+                                        // JS is stupid (text.substr(pos + 1, length) will truncate the substring if pos + 1 + length exceeds the string's length)
+                                        if ((pos + 1 >= text.Length ? "" : text.Substring(pos + 1, Math.Min(3, text.Length - (pos + 1)))) == "ING")
                                         {
                                             pos += 3;
                                             return true;
@@ -230,6 +234,7 @@ namespace SamSharp.Reciter
                                     }
 
                                     // Not "ER", "ES" or "ED"
+                                    // FIXME: Could break sometimes due to JS being stupid? Needs more testing
                                     if (!IsOneOf(text[pos + 2], 'R', 'S', 'D'))
                                     {
                                         // Not "EL"
@@ -271,7 +276,7 @@ namespace SamSharp.Reciter
             bool Matches(string text, int pos)
             {
                 // Check if content in brackets matches
-                if (!text.StartsWith(match[pos..]))
+                if (!text[pos..].StartsWith(match))
                     return false;
                 
                 // Check left
@@ -314,7 +319,7 @@ namespace SamSharp.Reciter
             int c = 0;
             while (inputPos < text.Length && c++ < 10000)
             {
-                Debug.WriteLine($"Processing {text.ToLower()[..inputPos]}");
+                Debug.WriteLine($"Processing {text.ToLower()[..inputPos] + text[inputPos] + text.ToLower()[(inputPos+1)..]}");
 
                 char currentChar = text[inputPos];
                 // Not '.' or '.' followed by number
@@ -323,7 +328,11 @@ namespace SamSharp.Reciter
                     // pos36607:
                     if (MatchesFlags(currentChar, CharFlags.Ruleset2))
                     {
-                        rules2.Any(rule => rule(text, inputPos, SuccessCallback));
+                        foreach (RuleMatcher rule in rules2)
+                        {
+                            if (rule(text, inputPos, SuccessCallback))
+                                break;
+                        }
                         continue;
                     }
                     
@@ -337,7 +346,11 @@ namespace SamSharp.Reciter
                             return null;
                         }
                         // Go to the right rules for this character
-                        rules[currentChar].Any(rule => rule(text, inputPos, SuccessCallback));
+                        foreach (RuleMatcher rule in rules[currentChar])
+                        {
+                            if (rule(text, inputPos, SuccessCallback))
+                                break;
+                        }
                         continue;
                     }
 
