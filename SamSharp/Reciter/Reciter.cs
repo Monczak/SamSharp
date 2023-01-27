@@ -45,7 +45,7 @@ namespace SamSharp.Reciter
         /// <param name="c">The char to test.</param>
         /// <param name="flags">The flags to test against.</param>
         /// <returns>Whether the char matches against the flags.</returns>
-        private bool MatchesFlags(char? c, CharFlags flags) => (c is null ? 0 : charFlags[c.Value] & (int)flags) != 0;
+        private bool MatchesFlags(char? c, CharFlags flags) => (c is null ? 0 : charFlags[c.Value] & flags) != 0;
         
         /// <summary>
         /// Matches a string's char against the specified flags.
@@ -147,7 +147,6 @@ namespace SamSharp.Reciter
                     }
 
                     // Rule char does not match
-                    // TODO: IndexOutOfRangeException thrown here
                     else if (text[--pos] != ruleByte)
                         return false;
                 }
