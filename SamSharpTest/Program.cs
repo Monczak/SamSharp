@@ -1,4 +1,5 @@
 ﻿using SamSharp;
+using SamSharp.Parser;
 using SamSharp.Reciter;
 
 namespace SamSharpTest;
@@ -8,6 +9,11 @@ public static class Program
     public static void Main(string[] args)
     {
         Reciter reciter = new Reciter();
-        Console.WriteLine(reciter.TextToPhonemes("2^3 = 8"));
+        Parser parser = new Parser();
+
+        string phonemes = reciter.TextToPhonemes("Hello, my name is SAM.");
+        Console.WriteLine(phonemes);
+
+        parser.Parse(phonemes);
     }
 }

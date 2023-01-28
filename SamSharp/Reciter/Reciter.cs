@@ -218,7 +218,7 @@ namespace SamSharp.Reciter
                                         // Are next chars "ING"?
                                         // JS is stupid (text.substr(pos + 1, length) will return "" if pos + 1 is out of range, so the condition evaluates to false)
                                         // JS is stupid (text.substr(pos + 1, length) will truncate the substring if pos + 1 + length exceeds the string's length)
-                                        if ((pos + 1 >= text.Length ? "" : text.Substring(pos + 1, Math.Min(3, text.Length - (pos + 1)))) == "ING")
+                                        if ((pos + 1 >= text.Length ? "" : text.JsSubstring(pos + 1, 3)) == "ING")
                                         {
                                             pos += 3;
                                             return true;
@@ -242,7 +242,7 @@ namespace SamSharp.Reciter
                                         if (CharAt(text, pos + 2) != 'L')
                                         {
                                             // "EFUL"
-                                            if (text.Substring(pos + 2, 3) == "FUL")
+                                            if (text.JsSubstring(pos + 2, 3) == "FUL")
                                             {
                                                 pos += 4;
                                                 return true;
