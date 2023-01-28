@@ -103,7 +103,7 @@ namespace SamSharp.Parser
 
                 // Should be a stress character. Search through the stress table backwards
                 int i = stressTable.Length - 1;
-                while (char1 != stressTable[i] && i > 0) match--;
+                while (char1 != stressTable[i] && i > 0) i--;
                 if (i == 0)
                     throw new Exception($"Could not parse char {char1}");
                 addStress(i);

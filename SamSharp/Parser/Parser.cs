@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SamSharp.Parser
 {
@@ -72,6 +73,14 @@ namespace SamSharp.Parser
 
             phonemeLengths[pos] = length;
         }
+        
+        private delegate void InsertPhonemeDelegate(int pos, int value, int stressValue, int length = 0);
+        private delegate void SetPhonemeDelegate(int pos, int value);
+        private delegate int? GetPhonemeDelegate(int pos);
+        private delegate int GetStressDelegate(int pos);
+        private delegate void SetStressDelegate(int pos, int stressValue);
+        private delegate int GetLengthDelegate(int pos);
+        private delegate void SetLengthDelegate(int pos, int length);
 
         private bool PhonemeHasFlag(int? phoneme, PhonemeFlags flag) =>
             phoneme is { } && Utils.MatchesBitmask((int)phonemeFlags[phoneme.Value], (int)flag);
@@ -83,7 +92,7 @@ namespace SamSharp.Parser
         /// </summary>
         /// <param name="input">The data to parse.</param>
         /// <returns>The parsed data.</returns>
-        public (string phoneme, int length, int stress)[]? Parse(string? input)
+        public List<(int? phoneme, int? length, int? stress)> Parse(string? input)
         {
             if (input is null)
                 return null;
@@ -102,15 +111,30 @@ namespace SamSharp.Parser
                 },
                 value =>
                 {
-                    if ((value & 128) == 0)
+                    if ((value & 128) != 0)
                         throw new Exception("Got the flag 0x80, see CopyStress() and SetPhonemeLengths() comments!");
                     stresses[pos - 1] = value; // Set stress for prior phoneme
                 });
             
+            // TODO: Refactor all this not to use callbacks (unnecessary in this way)
             Parser2(InsertPhoneme, SetPhoneme, GetPhoneme, GetStress);
-            PrintPhonemes();
+            CopyStress(GetPhoneme, GetStress, SetStress);
+            SetPhonemeLength(GetPhoneme, GetStress, SetLength);
+            AdjustLengths(GetPhoneme, SetLength, GetLength);
+            ProlongPlosiveStopConsonantsCode41240(GetPhoneme, InsertPhoneme, GetStress);
             
-            return null;
+            PrintPhonemes();
+
+            List<(int? phoneme, int? length, int? stress)>
+                result = new List<(int? phoneme, int? length, int? stress)>();
+
+            for (int i = 0; i < phonemeIndexes.Count; i++)
+            {
+                if (phonemeIndexes[i] != null)
+                    result.Add((phonemeIndexes[i], phonemeLengths[i], stresses[i]));
+            }
+
+            return result;
         }
 
         private void PrintPhonemes()
@@ -127,8 +151,8 @@ namespace SamSharp.Parser
                 Debug.WriteLine($" {i.ToString().PadLeft(3, '0')}" +
                                 $"  {phonemeIndexes[i].ToString().PadLeft(3, '0')}" +
                                 $"  {Name()}" +
-                                $"       {phonemeLengths[i]}" +
-                                $"     {stresses[i]}");
+                                $"       {phonemeLengths[i].ToString().PadLeft(3, '0')}" +
+                                $"     {stresses[i].ToString().PadLeft(3, '0')}");
             }
             
             Debug.WriteLine("==================================");

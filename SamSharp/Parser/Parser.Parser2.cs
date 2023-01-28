@@ -5,11 +5,6 @@ namespace SamSharp.Parser
 {
     public partial class Parser
     {
-        private delegate void InsertPhonemeDelegate(int pos, int value, int stressValue, int length = 0);
-        private delegate void SetPhonemeDelegate(int pos, int value);
-        private delegate int? GetPhonemeDelegate(int pos);
-        private delegate int GetStressDelegate(int pos);
-
         /**
          * Rewrites the phonemes using the following rules:
          *

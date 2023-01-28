@@ -11,9 +11,13 @@ public static class Program
         Reciter reciter = new Reciter();
         Parser parser = new Parser();
 
-        string phonemes = reciter.TextToPhonemes("Hello, my name is SAM.");
+        string phonemes = reciter.TextToPhonemes("Hello, my name is SAM and this is a test thing.");
         Console.WriteLine(phonemes);
 
-        parser.Parse(phonemes);
+        var parseResult = parser.Parse(phonemes);
+        foreach (var data in parseResult)
+        {
+            Console.WriteLine($"{data.phoneme}\t{data.length}\t{data.stress}");
+        }
     }
 }
