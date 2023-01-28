@@ -25,9 +25,6 @@ namespace SamSharp.Parser
             UnvoicedStopConsonant = 0x0001
         }
 
-        private const int PhonemePeriod = 1;
-        private const int PhonemeQuestion = 2;
-
         private const int pR = 23;
         private const int pD = 57;
         private const int pT = 69;

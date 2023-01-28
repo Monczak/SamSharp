@@ -145,9 +145,8 @@ namespace SamSharp.Parser
                         if (phoneme != null && PhonemeHasFlag(phoneme, PhonemeFlags.Vowel) && getStress(pos + 2) != 0)
                         {
                             Debug.WriteLine($"{pos + 2} RULE: Insert glottal stop between two stressed vowels with space between them");
+                            insertPhoneme(pos + 2, 31, 0); // 31 == "Q"
                         }
-
-                        insertPhoneme(pos + 2, 31, 0); // 31 == "Q"
                     }
                     continue;
                 }

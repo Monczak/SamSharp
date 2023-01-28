@@ -85,6 +85,20 @@ namespace SamSharp.Parser
         private bool PhonemeHasFlag(int? phoneme, PhonemeFlags flag) =>
             phoneme is { } && Utils.MatchesBitmask((int)phonemeFlags[phoneme.Value], (int)flag);
 
+        public struct PhonemeData
+        {
+            public int? Phoneme { get; }
+            public int? Length { get; }
+            public int? Stress { get; }
+
+            public PhonemeData(int? phoneme, int? length, int? stress)
+            {
+                Phoneme = phoneme;
+                Length = length;
+                Stress = stress;
+            }
+        }
+
         /// <summary>
         /// Parses speech data.
         ///
@@ -92,7 +106,7 @@ namespace SamSharp.Parser
         /// </summary>
         /// <param name="input">The data to parse.</param>
         /// <returns>The parsed data.</returns>
-        public List<(int? phoneme, int? length, int? stress)> Parse(string? input)
+        public PhonemeData[] Parse(string? input)
         {
             if (input is null)
                 return null;
@@ -125,16 +139,15 @@ namespace SamSharp.Parser
             
             PrintPhonemes();
 
-            List<(int? phoneme, int? length, int? stress)>
-                result = new List<(int? phoneme, int? length, int? stress)>();
+            List<PhonemeData> result = new List<PhonemeData>();
 
             for (int i = 0; i < phonemeIndexes.Count; i++)
             {
-                if (phonemeIndexes[i] != null)
-                    result.Add((phonemeIndexes[i], phonemeLengths[i], stresses[i]));
+                if (phonemeIndexes[i] != null && phonemeIndexes[i] != 0)
+                    result.Add(new PhonemeData(phonemeIndexes[i], phonemeLengths[i], stresses[i]));
             }
 
-            return result;
+            return result.ToArray();
         }
 
         private void PrintPhonemes()

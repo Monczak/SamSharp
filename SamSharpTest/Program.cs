@@ -1,6 +1,7 @@
 ﻿using SamSharp;
 using SamSharp.Parser;
 using SamSharp.Reciter;
+using SamSharp.Renderer;
 
 namespace SamSharpTest;
 
@@ -10,14 +11,18 @@ public static class Program
     {
         Reciter reciter = new Reciter();
         Parser parser = new Parser();
+        Renderer renderer = new Renderer();
 
-        string phonemes = reciter.TextToPhonemes("Hello, my name is SAM and this is a test thing.");
+        string phonemes = reciter.TextToPhonemes("if you're reading this, you're awesome.");
         Console.WriteLine(phonemes);
 
         var parseResult = parser.Parse(phonemes);
         foreach (var data in parseResult)
         {
-            Console.WriteLine($"{data.phoneme}\t{data.length}\t{data.stress}");
+            Console.WriteLine($"{data.Phoneme}\t{data.Length}\t{data.Stress}");
         }
+
+        var renderResult = renderer.Render(parseResult, new Renderer.Options());
+        File.WriteAllBytes("test.bin", renderResult);
     }
 }
