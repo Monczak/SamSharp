@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SamSharp.Renderer
 {
     public class OutputBuffer
     {
+        // TODO: Can allocate HUGE amounts of memory with long inputs, use streams instead?
         private byte[] buffer;
 
         private int bufferPos = 0;

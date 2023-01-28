@@ -177,7 +177,7 @@ namespace SamSharp.Renderer
                         lastSampleOffset = RenderSample(output, lastSampleOffset, flags, framesData.Pitches[pos & 0xFF]);
                     }
                 }
-                glottalPulse = framesData.Pitches[pos];
+                glottalPulse = framesData.Pitches[Math.Min(pos, framesData.Pitches.Count - 1)];
                 mem38 = (int)(glottalPulse * .75f);
             
                 // Reset the formant wave generators to keep them in sync with the glottal pulse
