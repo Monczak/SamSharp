@@ -1,19 +1,18 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using SamSharp.Renderer;
 
 namespace SamSharp
 {
     public class Sam
     {
-        public Renderer.Renderer.Options Options { get; set; }
+        public Options Options { get; set; }
 
-        public Sam(Renderer.Renderer.Options options)
+        public Sam(Options options)
         {
             Options = options;
         }
 
-        public Sam() : this(new Renderer.Renderer.Options())
+        public Sam() : this(new Options())
         {
         }
 
