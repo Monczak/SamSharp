@@ -61,7 +61,7 @@ sam.SpeakAsync("I am speaking asynchronously").ContinueWith(audio => DoSomething
 
 The `SamSharpTest` project contains a simple testing program, which can be run from the command line to try out SAM. Run it with:
 
-```ps
+```
 ./SamSharpTest [-p --pitch pitch] [-s --speed speed] [-m --mouth mouth] [-t --throat throat] [--phonetic] [--sing] [-o --output path/to/file.wav] <text to speak> 
 ```
 
