@@ -1,4 +1,4 @@
-﻿namespace SamSharp.Renderer
+﻿namespace SamSharp
 {
     public class Options
     {

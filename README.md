@@ -26,7 +26,46 @@ or the google translated version
 
 ## Usage
 
-None yet, this is WIP.
+### Example code usage
+
+Typical example:
+
+```cs
+Sam sam = new Sam();
+byte[] audio = sam.Speak("Hello, my name is SAM.");
+// Do something with the audio, for example play it or save to a file
+```
+
+With custom options:
+
+```cs
+Sam sam = new Sam(new Options(speed: 82, pitch: 72, throat: 110, mouth: 105));
+byte[] audio = sam.Speak("Hello, my name is Stuffy Guy.");
+```
+
+Phonetic mode:
+
+```cs
+Sam sam = new Sam();
+byte[] audio = sam.SpeakPhonetic("DHIHS IHZ FAHNEHTIHK MOW5D");
+```
+
+Async synthesis is also possible:
+
+```cs
+Sam sam = new Sam();
+sam.SpeakAsync("I am speaking asynchronously").ContinueWith(audio => DoSomething(audio));
+```
+
+### Command line usage
+
+The `SamSharpTest` project contains a simple testing program, which can be run from the command line to try out SAM. Run it with:
+
+```ps
+./SamSharpTest [-p --pitch pitch] [-s --speed speed] [-m --mouth mouth] [-t --throat throat] [--phonetic] [--sing] [-o --output path/to/file.wav] <text to speak> 
+```
+
+If the `-o` option is omitted, the program will play the synthesized speech on your default audio device. The `pitch`, `speed`, `mouth` and `throat` parameters should be numbers from 0 to 255.
 
 ### Typical voice values
 
