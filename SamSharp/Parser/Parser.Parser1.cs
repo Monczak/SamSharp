@@ -13,14 +13,30 @@ namespace SamSharp.Parser
         /// <returns>Whether the characters form a valid phoneme but not with wildcards.</returns>
         private int? FullMatch(char char1, char char2)
         {
-            int index = Array.FindIndex(phonemeNameTable, value => value == $"{char1}{char2}" && value[1] != '*');
-            return index != -1 ? index : (int?)null;
+            for (int i = 0; i < phonemeNameTable.Length; ++i)
+            {
+                var phonemeName = phonemeNameTable[i];
+                // Checks these chars individually to avoid allocating strings.
+                if (phonemeName[0] == char1 && phonemeName[1] == char2)
+                {
+                    return i;
+                }
+            }
+            return null;
         }
 
         private int? WildMatch(char char1)
         {
-            int index = Array.FindIndex(phonemeNameTable, value => value == char1 + "*");
-            return index != -1 ? index : (int?)null;
+            for (int i = 0; i < phonemeNameTable.Length; ++i)
+            {
+                var phonemeName = phonemeNameTable[i];
+                // Checks these chars individually to avoid allocating strings.
+                if (phonemeName[0] == char1 && phonemeName[1] == '*')
+                {
+                    return i;
+                }
+            }
+            return null;
         }
 
         /**
