@@ -21,19 +21,19 @@ namespace SamSharp.Renderer
             Ary(index, new[] { scaled, scaled, scaled, scaled, scaled });
         }
 
-        public void Ary(int index, int[] array)
+        // Timetable for more accurate C64 simulation
+        private readonly byte[] timetable =
         {
-            // Timetable for more accurate C64 simulation
-            var timetable = new[]
-            {
-                new[] { 162, 167, 167, 127, 128 }, // Formants synth
-                new[] { 226, 60, 60, 0, 0 }, // Unvoiced sample 0
-                new[] { 225, 60, 59, 0, 0 }, // Unvoiced sample 1
-                new[] { 200, 0, 0, 54, 55 }, // Voiced sample 0
-                new[] { 199, 0, 0, 54, 54 }, // Voiced sample 1
-            };
+          162, 167, 167, 127, 128, // Formants synth
+          226, 60, 60, 0, 0, // Unvoiced sample 0
+          225, 60, 59, 0, 0, // Unvoiced sample 1
+          200, 0, 0, 54, 55, // Voiced sample 0
+          199, 0, 0, 54, 54, // Voiced sample 1
+        };
 
-            bufferPos += timetable[oldTimeTableIndex][index];
+        public void Ary(int index, Span<int> array)
+        {
+            bufferPos += timetable[5 * oldTimeTableIndex + index];
 
             if (bufferPos / 50 > buffer.Length)
                 throw new Exception($"Buffer overflow, want {bufferPos / 50} but buffer size is {buffer.Length}");
