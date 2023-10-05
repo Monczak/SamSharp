@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SamSharp.Parser
+﻿namespace SamSharp.Parser
 {
     public partial class Parser
     {

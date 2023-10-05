@@ -1,6 +1,4 @@
-﻿using System.IO.IsolatedStorage;
-
-namespace SamSharp.Renderer
+﻿namespace SamSharp.Renderer
 {
     public partial class Renderer
     {

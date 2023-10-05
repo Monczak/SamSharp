@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SamSharp
+﻿namespace SamSharp
 {
     internal class Utils
     {

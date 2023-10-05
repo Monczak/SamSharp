@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace SamSharp.Renderer
+﻿namespace SamSharp.Renderer
 {
     public partial class Renderer
     {
