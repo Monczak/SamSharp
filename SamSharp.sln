@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamSharp", "SamSharp\SamSha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamSharpCli", "SamSharpCli\SamSharpCli.csproj", "{47982F03-B33A-4492-B607-1E3C199C9AA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharp Tests", "SamSharp Tests\SamSharp Tests.csproj", "{5B17B8F3-7483-489B-AFA2-516F43428CD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
