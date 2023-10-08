@@ -2,7 +2,7 @@
 using CommandLine;
 using NAudio.Wave;
 
-namespace SamSharpTest;
+namespace SamSharpCli;
 
 public static class Program
 {

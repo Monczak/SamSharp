@@ -59,10 +59,10 @@ sam.SpeakAsync("I am speaking asynchronously").ContinueWith(audio => DoSomething
 
 ### Command line usage
 
-The `SamSharpTest` project contains a simple testing program, which can be run from the command line to try out SAM. Run it with:
+The `SamSharpCli` project contains a simple testing program, which can be run from the command line to try out SAM. Run it with:
 
 ```
-./SamSharpTest [-p --pitch pitch] [-s --speed speed] [-m --mouth mouth] [-t --throat throat] [--phonetic] [--sing] [-o --output path/to/file.wav] <text to speak> 
+./SamSharpCli [-p --pitch pitch] [-s --speed speed] [-m --mouth mouth] [-t --throat throat] [--phonetic] [--sing] [-o --output path/to/file.wav] <text to speak> 
 ```
 
 If the `-o` option is omitted, the program will play the synthesized speech on your default audio device. The `pitch`, `speed`, `mouth` and `throat` parameters should be numbers from 0 to 255.
