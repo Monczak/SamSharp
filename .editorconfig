@@ -144,12 +144,12 @@ csharp_style_allow_embedded_statements_on_same_line_experimental = true
 #### C# Formatting Rules ####
 
 # New line preferences
+csharp_new_line_before_open_brace = all
 csharp_new_line_before_catch = true
 csharp_new_line_before_else = true
 csharp_new_line_before_finally = true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_before_members_in_object_initializers = true
-csharp_new_line_before_open_brace = true
 csharp_new_line_between_query_expression_clauses = true
 
 # Indentation preferences
@@ -199,10 +199,6 @@ dotnet_naming_rule.interface_should_be_ipascalcase.style = ipascalcase
 dotnet_naming_rule.types_should_be_pascalcase.severity = error
 dotnet_naming_rule.types_should_be_pascalcase.symbols = types
 dotnet_naming_rule.types_should_be_pascalcase.style = pascalcase
-
-dotnet_naming_rule.private_property_or_method_should_be_pascalcase_.severity = error
-dotnet_naming_rule.private_property_or_method_should_be_pascalcase_.symbols = private_property_or_method
-dotnet_naming_rule.private_property_or_method_should_be_pascalcase_.style = pascalcase_
 
 dotnet_naming_rule.non_field_members_should_be_pascalcase.severity = error
 dotnet_naming_rule.non_field_members_should_be_pascalcase.symbols = non_field_members
@@ -261,11 +257,6 @@ dotnet_naming_style.ipascalcase.required_prefix = I
 dotnet_naming_style.ipascalcase.required_suffix = 
 dotnet_naming_style.ipascalcase.word_separator = 
 dotnet_naming_style.ipascalcase.capitalization = pascal_case
-
-dotnet_naming_style.pascalcase_.required_prefix = 
-dotnet_naming_style.pascalcase_.required_suffix = _
-dotnet_naming_style.pascalcase_.word_separator = 
-dotnet_naming_style.pascalcase_.capitalization = pascal_case
 
 dotnet_naming_style.camelcase.required_prefix = 
 dotnet_naming_style.camelcase.required_suffix = 
