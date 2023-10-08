@@ -1,6 +1,5 @@
 # SAM Software Automatic Mouth
 
-![GitHub](https://img.shields.io/github/license/Monczak/SamSharp)
 ![Unit tests](https://github.com/MeltyPlayer/SamSharp/actions/workflows/dotnet.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/MeltyPlayer/SamSharp/badge.svg?service=github)](https://coveralls.io/github/MeltyPlayer/SamSharp)
 
