@@ -90,7 +90,9 @@ namespace SamSharp.Parser
             {
                 // Is phoneme pause?
                 if (phoneme == 0)
+                {
                     continue;
+                }
 
                 if (PhonemeHasFlag(phoneme, PhonemeFlags.Diphthong))
                 {
@@ -151,19 +153,19 @@ namespace SamSharp.Parser
                 }
 
                 var priorPhoneme = (pos == 0) ? null : getPhoneme(pos - 1);
-                if (phoneme == pR)
+                if (phoneme == Pr)
                 {
                     // Rules for phonemes before R
                     switch (priorPhoneme)
                     {
-                        case pT:
+                        case Pt:
                         {
                             // Example: TRACK
                             Debug.WriteLine($"{pos} RULE: T* R* -> CH R*");
                             setPhoneme(pos - 1, 42);
                             break;
                         }
-                        case pD:
+                        case Pd:
                         {
                             // Example: DRY
                             Debug.WriteLine($"{pos} RULE: D* R* -> J* R*");

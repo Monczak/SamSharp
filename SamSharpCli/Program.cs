@@ -2,15 +2,13 @@
 using CommandLine;
 using NAudio.Wave;
 
-namespace SamSharpTest;
+namespace SamSharpCli;
 
 public static class Program
 {
-    public static void Main(string[] args)
-    {
+    public static void Main(string[] args) =>
         Parser.Default.ParseArguments<CommandLineOptions>(args)
             .WithParsed(RunOptions);
-    }
 
     private static void RunOptions(CommandLineOptions options)
     {

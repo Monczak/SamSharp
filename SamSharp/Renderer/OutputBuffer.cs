@@ -36,20 +36,27 @@ namespace SamSharp.Renderer
             bufferPos += timetable[5 * oldTimeTableIndex + index];
 
             if (bufferPos / 50 > buffer.Length)
+            {
                 throw new Exception($"Buffer overflow, want {bufferPos / 50} but buffer size is {buffer.Length}");
+            }
 
             oldTimeTableIndex = index;
             
             // Write a little bit in advance
             for (int k = 0; k < 5; k++)
+            {
                 buffer[bufferPos / 50 + k] = (byte)array[k];
+            }
         }
 
         public byte[] Get()
         {
             byte[] bytes = new byte[bufferPos / 50];
             for (int i = 0; i < bufferPos / 50; i++)
+            {
                 bytes[i] = (byte)(buffer[i]);
+            }
+
             return bytes;
         }
     }

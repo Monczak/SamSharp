@@ -18,9 +18,14 @@
             {
                 var stress = getStress(position);
                 if (stress == 0 || stress > 0x7F)
+                {
                     setLength(position, combinedPhonemeLengthTable[phoneme.Value] & 0xFF);
+                }
                 else
+                {
                     setLength(position, combinedPhonemeLengthTable[phoneme.Value] >> 8);
+                }
+
                 position++;
             }
         }

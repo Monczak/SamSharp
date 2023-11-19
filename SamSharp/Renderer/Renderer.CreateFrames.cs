@@ -36,16 +36,22 @@ namespace SamSharp.Renderer
                 // Store the location of the punctuation
                 int end = pos;
                 if (pos < 30)
+                {
                     pos = 0;
+                }
                 else
+                {
                     pos -= 30;
+                }
 
                 int a;
                 
                 // FIXME: Explain this fix better, it's not obvious
                 // ML : A =, fixes a problem with invalid pitch with '.'
                 while ((a = pitches[pos]) == 127)
+                {
                     pos++;
+                }
 
                 while (pos != end)
                 {
@@ -68,12 +74,16 @@ namespace SamSharp.Renderer
                 var phoneme = data.Phoneme;
 
                 if (phoneme == PhonemePeriod)
+                {
                     AddInflection(FallingInflection, x, framesData.Pitches);
+                }
                 else if (phoneme == PhonemeQuestion)
+                {
                     AddInflection(RisingInflection, x, framesData.Pitches);
+                }
 
                 // Get the stress amount (more stress = higher pitch)
-                var phase1 = stressPitch_tab47492[data.Stress!.Value];
+                var phase1 = stressPitchTab47492[data.Stress!.Value];
                 
                 // Get number of frames to write
                 // Copy from the source to the frames list

@@ -10,7 +10,7 @@
         private readonly int[] sampledConsonantValues0 = { 0x18, 0x1A, 0x17, 0x17, 0x17 };
         
         // Stress pitch table
-        private readonly int[] stressPitch_tab47492 = { 0x00, 0xE0, 0xE6, 0xEC, 0xF3, 0xF9, 0x00, 0x06, 0xC, 0x06 };
+        private readonly int[] stressPitchTab47492 = { 0x00, 0xE0, 0xE6, 0xEC, 0xF3, 0xF9, 0x00, 0x06, 0xC, 0x06 };
         
         // Used to decide which phoneme's blend lengths to pick. The candidate with the lower score is selected
         // tab45856

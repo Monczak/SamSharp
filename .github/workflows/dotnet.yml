@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+        include-prerelease: true
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      
+    - name: Set Up NPM
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install 'lcov-result-merger'
+      run: npm i -g lcov-result-merger
+    - name: Merge Test Coverage
+      run: lcov-result-merger "**/coverage.info" "lcov.info"
+
+    - name: Upload to Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: lcov.info

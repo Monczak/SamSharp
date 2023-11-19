@@ -1,8 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharp", "SamSharp\SamSharp.csproj", "{26A545A7-D52C-4EA4-A754-1494035CB760}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34112.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamSharp", "SamSharp\SamSharp.csproj", "{26A545A7-D52C-4EA4-A754-1494035CB760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharpTest", "SamSharpTest\SamSharpTest.csproj", "{47982F03-B33A-4492-B607-1E3C199C9AA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SamSharpCli", "SamSharpCli\SamSharpCli.csproj", "{47982F03-B33A-4492-B607-1E3C199C9AA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamSharp Tests", "SamSharp Tests\SamSharp Tests.csproj", "{5B17B8F3-7483-489B-AFA2-516F43428CD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +23,15 @@ Global
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47982F03-B33A-4492-B607-1E3C199C9AA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B17B8F3-7483-489B-AFA2-516F43428CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00931D7B-43DB-46DD-A7B2-407C60C0FED8}
 	EndGlobalSection
 EndGlobal

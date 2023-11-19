@@ -84,16 +84,26 @@ namespace SamSharp.Renderer
                         // Accumulated a whole integer error, so adjust output
                         error -= width;
                         if (sign)
+                        {
                             val--;
+                        }
                         else if (val != 0)
+                        {
                             val++;  // If input is 0, we always leave it alone
+                        }
                     }
                     
                     // Write updated value back to next frame
                     if (table < 0 || table >= tables.Length)
+                    {
                         throw new Exception($"(Interpolate) Invalid table in Read: {table}");
+                    }
+
                     if (frame + 1 < tables[table].Count)
+                    {
                         tables[table][++frame] = val;
+                    }
+
                     val += div; // WTF: This is in the JS code, but this does nothing useful? 
                 }
             }
@@ -169,7 +179,7 @@ namespace SamSharp.Renderer
             }
             
             // Add the length of the last phoneme
-            return boundary + phonemes[^1].Length!.Value;
+            return boundary + (phonemes.Length > 0 ? phonemes[^1].Length!.Value : 0);
         }
     }
 }
