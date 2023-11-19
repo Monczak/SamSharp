@@ -93,6 +93,11 @@ namespace SamSharp.Renderer
          */
         private void ProcessFrames(OutputBuffer output, int frameCount, int speed, FramesData framesData)
         {
+            if (framesData.Pitches.Count == 0)
+            {
+                return;
+            }
+
             int speedCounter = speed;
             int phase1 = 0, phase2 = 0, phase3 = 0;
             int lastSampleOffset = 0;
