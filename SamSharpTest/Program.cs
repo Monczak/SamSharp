@@ -1,8 +1,6 @@
-﻿using System.Text;
-using SamSharp;
+﻿using SamSharp;
 using CommandLine;
 using NAudio.Wave;
-using SamSharp.Renderer;
 
 namespace SamSharpTest;
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 
 namespace SamSharp.Renderer
 {
@@ -97,6 +95,7 @@ namespace SamSharp.Renderer
             int glottalPulse = framesData.Pitches[0];
             int mem38 = (int)(glottalPulse * .75f);
 
+            Span<int> ary = stackalloc int[5];
             while (frameCount > 0)
             {
                 var flags = framesData.SampledConsonantFlags[pos];
@@ -117,7 +116,6 @@ namespace SamSharp.Renderer
                     // 128-255 = 0x70
                     
                     // Simulate the glottal pulse and formants
-                    int[] ary = new int[5];
                     int p1 = phase1 * 256;
                     int p2 = phase2 * 256;
                     int p3 = phase3 * 256;
