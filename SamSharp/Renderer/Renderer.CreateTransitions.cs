@@ -179,7 +179,7 @@ namespace SamSharp.Renderer
             }
             
             // Add the length of the last phoneme
-            return boundary + phonemes.Length > 0 ? phonemes[^1].Length!.Value : 0;
+            return boundary + (phonemes.Length > 0 ? phonemes[^1].Length!.Value : 0);
         }
     }
 }
