@@ -38,14 +38,18 @@ namespace SamSharp.Parser
             {
                 // Not punctuation?
                 if (!PhonemeHasFlag(getPhoneme(position), PhonemeFlags.Punctuation))
+                {
                     continue;
+                }
 
                 int loopIndex = position;
                 while (--position > 1 && !PhonemeHasFlag(getPhoneme(position), PhonemeFlags.Vowel)) { } // Back up while not a vowel
                 // If beginning of phonemes, exit loop
                 if (position == 0)
+                {
                     break;
-                
+                }
+
                 // Now handle everything between position and loopIndex
                 int vowel = position;
                 for (; position < loopIndex; position++)

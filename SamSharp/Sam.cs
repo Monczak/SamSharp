@@ -30,14 +30,8 @@ namespace SamSharp
             return renderer.Render(data, Options);
         }
 
-        public Task<byte[]> SpeakAsync(string input)
-        {
-            return Task<byte[]>.Factory.StartNew(() => Speak(input));
-        }
+        public Task<byte[]> SpeakAsync(string input) => Task<byte[]>.Factory.StartNew(() => Speak(input));
 
-        public Task<byte[]> SpeakPhoneticAsync(string phoneticInput)
-        {
-            return Task<byte[]>.Factory.StartNew(() => SpeakPhonetic(phoneticInput));
-        }
+        public Task<byte[]> SpeakPhoneticAsync(string phoneticInput) => Task<byte[]>.Factory.StartNew(() => SpeakPhonetic(phoneticInput));
     }
 }

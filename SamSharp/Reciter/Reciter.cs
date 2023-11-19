@@ -26,7 +26,10 @@ namespace SamSharp.Reciter
             {
                 (RuleMatcher matcher, char c) = GenerateReciterRule(rule);
                 if (!rules.ContainsKey(c))
+                {
                     rules[c] = new List<RuleMatcher>();
+                }
+
                 rules[c].Add(matcher);
             }
 
@@ -108,17 +111,23 @@ namespace SamSharp.Reciter
                                 '@' => () =>
                                 {
                                     if (FlagsAt(text, --pos, CharFlags.Voiced))
+                                    {
                                         return true;
+                                    }
 
                                     var inputChar = CharAt(text, pos);
                                     // 'H'
                                     if (inputChar != 'H')
+                                    {
                                         return false;
+                                    }
 
                                     // FIXME: This is always true apparently
                                     // Check for 'T', 'C', 'S'
                                     if (!IsOneOf(inputChar, 'T', 'C', 'S'))
+                                    {
                                         return false;
+                                    }
 
                                     throw new Exception("TCS didn't match, always false but happened?");
                                 },
@@ -132,7 +141,10 @@ namespace SamSharp.Reciter
                                     while (pos >= 0)
                                     {
                                         if (!FlagsAt(text, pos - 1, CharFlags.Consonant))
+                                        {
                                             break;
+                                        }
+
                                         pos--;
                                     }
 
@@ -147,7 +159,9 @@ namespace SamSharp.Reciter
 
                     // Rule char does not match
                     else if (text[--pos] != ruleByte)
+                    {
                         return false;
+                    }
                 }
 
                 return true;
@@ -177,17 +191,23 @@ namespace SamSharp.Reciter
                                 '@' => () =>
                                 {
                                     if (FlagsAt(text, ++pos, CharFlags.Voiced))
+                                    {
                                         return true;
+                                    }
 
                                     var inputChar = CharAt(text, pos);
                                     // 'H'
                                     if (inputChar != 'H')
+                                    {
                                         return false;
+                                    }
 
                                     // FIXME: This is always true apparently
                                     // Check for 'T', 'C', 'S'
                                     if (!IsOneOf(inputChar, 'T', 'C', 'S'))
+                                    {
                                         return false;
+                                    }
 
                                     throw new Exception("TCS didn't match, always false but happened?");
                                 },
@@ -199,7 +219,10 @@ namespace SamSharp.Reciter
                                 ':' => () =>
                                 {
                                     while (FlagsAt(text, pos + 1, CharFlags.Consonant))
+                                    {
                                         pos++;
+                                    }
+
                                     return true;
                                 },
                                 /* '%' - check if we have:
@@ -252,7 +275,10 @@ namespace SamSharp.Reciter
 
                                         // Not "ELY"
                                         if (CharAt(text, pos + 3) != 'Y')
+                                        {
                                             return false;
+                                        }
+
                                         pos += 3;
                                         return true;
                                     }
@@ -268,7 +294,9 @@ namespace SamSharp.Reciter
                     }
                     // Rule char does not match
                     else if (CharAt(text, ++pos) != ruleByte)
+                    {
                         return false;
+                    }
                 }
                 return true;
             }
@@ -277,15 +305,21 @@ namespace SamSharp.Reciter
             {
                 // Check if content in brackets matches
                 if (!text[pos..].StartsWith(match))
+                {
                     return false;
-                
+                }
+
                 // Check left
                 if (!CheckPrefix(text, pos))
+                {
                     return false;
-                
+                }
+
                 // Check right
                 if (!CheckSuffix(text, pos + match.Length - 1))
+                {
                     return false;
+                }
 
                 return true;
             }
@@ -338,7 +372,9 @@ namespace SamSharp.Reciter
                         foreach (RuleMatcher rule in rules2)
                         {
                             if (rule(text, inputPos, SuccessCallback))
+                            {
                                 break;
+                            }
                         }
                         continue;
                     }
@@ -356,7 +392,9 @@ namespace SamSharp.Reciter
                         foreach (RuleMatcher rule in rules[currentChar])
                         {
                             if (rule(text, inputPos, SuccessCallback))
+                            {
                                 break;
+                            }
                         }
                         continue;
                     }

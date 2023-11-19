@@ -11,8 +11,8 @@ public class GoldenWordsTests
 {
     private readonly Sam sam = new();
 
-    private readonly static DirectoryInfo goldensDirectory;
-    private readonly static DirectoryInfo goldenWordsDirectory;
+    private static readonly DirectoryInfo GoldensDirectory;
+    private static readonly DirectoryInfo GoldenWordsDirectory;
 
     static GoldenWordsTests()
     {
@@ -32,14 +32,14 @@ public class GoldenWordsTests
         Assert.IsNotNull(currentDir);
 
         var gloTestsDir = currentDir;
-        goldensDirectory = gloTestsDir.GetDirectories("goldens").Single();
-        goldenWordsDirectory =
-            goldensDirectory.GetDirectories("words").Single();
+        GoldensDirectory = gloTestsDir.GetDirectories("goldens").Single();
+        GoldenWordsDirectory =
+            GoldensDirectory.GetDirectories("words").Single();
     }
 
     private static IEnumerable<string> GetGoldenWords() =>
         File.ReadAllLines(
-                goldensDirectory.GetFiles("words/list.txt").Single().FullName)
+                GoldensDirectory.GetFiles("words/list.txt").Single().FullName)
             .Select(line => line.Trim())
             .Where(line => line.Length > 0);
 
@@ -53,7 +53,7 @@ public class GoldenWordsTests
             new WaveFormat(22050, 8, 1));
 
         var outputPath =
-            Path.Join(goldenWordsDirectory.FullName, $"{word}.ogg");
+            Path.Join(GoldenWordsDirectory.FullName, $"{word}.ogg");
         if (!File.Exists(outputPath))
         {
             WaveFileWriter.CreateWaveFile(outputPath, provider);

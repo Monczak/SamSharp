@@ -34,9 +34,14 @@ namespace SamSharp.Renderer
                 do
                 {
                     if ((sample & 128) != 0)
+                    {
                         output.Write(index1, value1);
+                    }
                     else
+                    {
                         output.Write(index0, value0);
+                    }
+
                     sample <<= 1;
                 } while (--bit > 0);
             }
@@ -147,7 +152,10 @@ namespace SamSharp.Renderer
                     {
                         pos++;          // Go to next amplitude
                         frameCount--;
-                        if (frameCount == 0) return;
+                        if (frameCount == 0)
+                        {
+                            return;
+                        }
 
                         speedCounter = speed;
                     }

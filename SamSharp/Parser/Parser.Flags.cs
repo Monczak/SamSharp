@@ -25,8 +25,8 @@ namespace SamSharp.Parser
             UnvoicedStopConsonant = 0x0001
         }
 
-        private const int pR = 23;
-        private const int pD = 57;
-        private const int pT = 69;
+        private const int Pr = 23;
+        private const int Pd = 57;
+        private const int Pt = 69;
     }
 }

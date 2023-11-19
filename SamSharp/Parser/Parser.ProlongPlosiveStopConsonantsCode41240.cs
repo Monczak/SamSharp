@@ -19,8 +19,10 @@
             {
                 // Not a stop consonant, move to the next one
                 if (!PhonemeHasFlag(phoneme, PhonemeFlags.StopConsonant))
+                {
                     continue;
-                
+                }
+
                 // If plosive, move to the next non-empty phoneme and validate the flags
                 if (PhonemeHasFlag(phoneme, PhonemeFlags.UnvoicedStopConsonant))
                 {
@@ -35,7 +37,9 @@
                     // If not END and either flag 0x0008 or "/H" or "/X"
                     if (nextNonEmpty != null && (PhonemeHasFlag(nextNonEmpty, PhonemeFlags._0x0008) ||
                                                  nextNonEmpty == 36 || nextNonEmpty == 37))
+                    {
                         continue;
+                    }
                 }
 
                 insertPhoneme(pos + 1, phoneme.Value + 1, getStress(pos),

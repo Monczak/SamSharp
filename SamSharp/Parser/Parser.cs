@@ -17,11 +17,15 @@ namespace SamSharp.Parser
         private int? GetPhoneme(int pos)
         {
             if (pos == phonemeIndexes.Count)
+            {
                 return null;
-            
+            }
+
             if (pos < 0 || pos > phonemeIndexes.Count)
+            {
                 throw new Exception($"Out of bounds: {pos}");
-            
+            }
+
             return pos == phonemeIndexes.Count ? null : phonemeIndexes[pos];
         }
 
@@ -108,8 +112,10 @@ namespace SamSharp.Parser
         public PhonemeData[] Parse(string? input)
         {
             if (input is null)
+            {
                 return null;
-            
+            }
+
             stresses = new Dictionary<int, int?>();
             phonemeLengths = new Dictionary<int, int?>();
             phonemeIndexes = new Dictionary<int, int?>();
@@ -125,7 +131,10 @@ namespace SamSharp.Parser
                 value =>
                 {
                     if ((value & 128) != 0)
+                    {
                         throw new Exception("Got the flag 0x80, see CopyStress() and SetPhonemeLengths() comments!");
+                    }
+
                     stresses[pos - 1] = value; // Set stress for prior phoneme
                 });
             
@@ -143,7 +152,9 @@ namespace SamSharp.Parser
             for (int i = 0; i < phonemeIndexes.Count; i++)
             {
                 if (phonemeIndexes[i] != null && phonemeIndexes[i] != 0)
+                {
                     result.Add(new PhonemeData(phonemeIndexes[i], phonemeLengths[i], stresses[i]));
+                }
             }
 
             return result.ToArray();
